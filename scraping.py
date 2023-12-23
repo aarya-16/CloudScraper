@@ -3,16 +3,20 @@ from selenium import webdriver
 from display import display
 
 
-def scrape_price(dep, arr, travel_date):
+def scrape_price(dep, arr, travel_date,adult,child,infant,seat):
     driver = webdriver.Chrome()
 
     source = dep.upper()
     destination = arr.upper()
-    passenger_count = "1"
+    # passenger_count = "1"
+    adult_count = adult
+    child_count = child
+    infant_count = infant
+    seat_type = seat[0]
     travel_date = travel_date
 
     driver.get(
-        f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{passenger_count}/0/0/E/{travel_date}/")
+        f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{adult_count}/{child_count}/{infant_count}/{seat_type}/{travel_date}/")
     driver.minimize_window()
     driver.implicitly_wait(10)
 
@@ -50,5 +54,5 @@ def scrape_price(dep, arr, travel_date):
                             'Flight duration': flight_duration[flight].text,
                             'Price': prices[flight].text}
         dict_list.append(flight_info_dict)
-    driver.close()
+    # driver.close()
     display(dict_list)
