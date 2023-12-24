@@ -15,7 +15,7 @@ def display(dict_list):
             widget.destroy()
 
         style = ttk.Style()
-        style.configure("Treeview", font=('Segoe UI', 18))  # Set font for the table
+        style.configure("Treeview", font=('Segoe UI', 18),)  # Set font for the table
 
         table = ttk.Treeview(frame4, columns=column, show="headings", style="Treeview")
 
@@ -41,8 +41,8 @@ def display(dict_list):
 
         for val in tab:
             table.insert("", END, values=val,tags=('center',))
-
-        table.grid(row=0, column=0, sticky="ew")
+                    
+        table.grid(row=0, column=0, sticky="nsew")
 
     frame = Frame(root, bg='white')
     frame.pack(fill="both", expand=True)
