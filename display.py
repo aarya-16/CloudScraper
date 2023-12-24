@@ -1,9 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 
+
 def display(dict_list):
     root = Tk()
-    root.geometry('1200x600')  # Increase the dimensions of the root window
+    
+    # root.geometry('1200x600')  # Increase the dimensions of the root window
     root.title("Flight Information")  # Set a title for the window
     root.configure(bg='white')  # Set root window background to white
 
@@ -14,9 +16,13 @@ def display(dict_list):
         for widget in frame4.winfo_children():
             widget.destroy()
 
-        style = ttk.Style()
-        style.configure("Treeview", font=('Segoe UI', 18),)  # Set font for the table
-
+        # style = ttk.Style()
+        # style.configure("Treeview", font=('Segoe UI', 50),)  # Set font for the table
+        style = ttk.Style(frame4) 
+        style.theme_use("alt") # set theam to clam
+        style.configure("Treeview", background="black", 
+                        fieldbackground="black", foreground="white")
+        style.configure('Treeview.Heading', background="coral",relief='flat')
         table = ttk.Treeview(frame4, columns=column, show="headings", style="Treeview")
 
         table.heading("Airline", text="Airline")
@@ -44,7 +50,7 @@ def display(dict_list):
                     
         table.grid(row=0, column=0, sticky="nsew")
 
-    frame = Frame(root, bg='white')
+    frame = Frame(root)
     frame.pack(fill="both", expand=True)
 
     # Configure row and column weights to make the frame and table expandable

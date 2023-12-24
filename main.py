@@ -38,7 +38,7 @@ root.grid()
 # root.grid_columnconfigure(3, weight=1)
 # root.grid_columnconfigure(4, weight=1)
 # root.grid_columnconfigure(5, weight=1)
-root.geometry('675x700')
+root.geometry('525x600')
 root.resizable(width=False,height=False)
 frame = Frame(root)
 
