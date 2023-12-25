@@ -4,7 +4,11 @@ from display import display
 
 
 def scrape_price(dep, arr, travel_date,adult,child,infant,seat):
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--window-size=1920,1080')  
+    chrome_options.add_argument('--headless')
+    driver = webdriver.Chrome(options=chrome_options)
+    # driver = webdriver.Chrome()
 
     source = dep.upper()
     destination = arr.upper()
