@@ -54,5 +54,3 @@ def display(dict_list):
     update_table(frame, dict_list)
 
     root.mainloop()
-
-
