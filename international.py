@@ -25,12 +25,7 @@ time = driver.find_elements(By.CLASS_NAME, "_29g4q")[:(2*total_flights)]
 more_details = driver.find_elements(By.CLASS_NAME, "_3U68I")[:total_flights]
 stops = driver.find_elements(By.CLASS_NAME, "_1FfRE")[:total_flights]
 
-# prices.extend(driver.find_elements(By.CLASS_NAME, "_2RNuC"))
-# carrier_name.extend(driver.find_elements(By.CLASS_NAME, "cBm7W"))
-# flight_duration.extend(driver.find_elements(By.CLASS_NAME, "QPbNf"))
-# time.extend(driver.find_elements(By.CLASS_NAME, "_4Q7O5"))
-# more_details.extend(driver.find_elements(By.CLASS_NAME, "_3WBGO"))
-# stops.extend(driver.find_elements(By.CLASS_NAME, "_2_3yg"))
+
 
 flight_codes = []
 for element in more_details:
@@ -64,4 +59,3 @@ for flight in range(len(prices)):
 for flight in dict_list:
     # if flight['Stops'] == 'Non-Stop' and flight['Arrival time'][-3:] == destination:
     print(flight)
-
