@@ -1,8 +1,14 @@
 from tkinter import *
 from tkinter import ttk
-
+import pandas as pd
 
 def display(dict_list):
+    
+    # df = pd.DataFrame(dict_list)
+
+    # # Save the DataFrame to an Excel file
+    # df.to_excel('output.xlsx', index=False)
+
     root = Tk()
     
     # root.geometry('1200x600')  # Increase the dimensions of the root window
@@ -60,5 +66,4 @@ def display(dict_list):
     update_table(frame, dict_list)
 
     root.mainloop()
-
-
+    

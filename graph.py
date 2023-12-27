@@ -38,4 +38,4 @@ def make_plot(dates, prices):
     plt.xticks(dates[::2], fontsize=8)
     plt.legend()
 
-    plt.savefig("result")
+    plt.show('Graph')
