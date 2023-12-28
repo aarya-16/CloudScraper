@@ -58,5 +58,11 @@ for flight in range(len(prices)):
                         'Price': prices[flight].text}
     dict_list.append(flight_info_dict)
 
+returning_flights = []
 for flight in dict_list:
-    print(flight)
+    if flight['Arrival time'][-3:] == source:
+        returning_flights.append(flight)
+        dict_list.remove(flight)
+
+for element in returning_flights:
+    print(element)
