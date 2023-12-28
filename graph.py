@@ -44,4 +44,3 @@ def make_plot(source, destination, travel_date):
     plt.show()
 
 
-make_plot('BOM', "MAA", '2023-12-31')
