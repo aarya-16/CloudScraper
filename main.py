@@ -122,10 +122,6 @@ from_lb = Listbox(frame,width=50,height=5)
 from_lb.grid(row=1, column=1) 
 update(l,from_lb)
 from_lb.bind('<ButtonRelease-1>', lambda event: on_listbox_click(event,from_lb,from_e))
-# from_ = Text(frame, height="1", width=50)
-# from_.grid(row=0, column=1,pady=10)
-# fromButton = Button(frame, text='Select', command=from_select, bg='white')
-# fromButton.grid(row=0, column=2,pady=10)
 
 toLabel = Label(frame, text="To: ")
 toLabel.grid(row=2, column=0,pady=10)
@@ -145,12 +141,6 @@ depLabel = Label(frame, text="Departure date: ")
 depLabel.grid(row=4, column=0,pady=10)
 cal1 = Calendar(frame, selectmode="day")
 cal1.grid(row=4, column=1,pady=10)
-
-# select_button1 = Button(frame, text="Select Date", command=lambda: on_date_select(cal1, date_label), bg='white')
-# select_button1.grid(row=3, column=1,pady=10)
-
-# date_label = Label(frame, text="Selected Date: ")
-# date_label.grid(row=2, column=2,pady=10)
 
 seat_label = Label(frame,text='Type of seat: ')
 seat_label.grid(row=5,column=0,pady=10)
@@ -179,17 +169,6 @@ infant_label.grid(row=9,column=0,pady=10)
 
 infant_select = Spinbox(frame, from_= 0, to = 25,state='readonly')
 infant_select.grid(row=9,column=1,pady=10)
-# arrLabel = Label(frame, text="Arrival date: ")  # Fix label text
-# arrLabel.grid(row=4, column=0)
-# cal2 = Calendar(frame, selectmode="day")
-# cal2.grid(row=4, column=1)
-#
-# select_button2 = Button(frame, text="Select Date", command=lambda: on_date_select(cal2, date_label2), bg='white')
-# select_button2.grid(row=5, column=1)
-#
-# date_label2 = Label(frame, text="Selected Date: ")
-# date_label2.grid(row=4, column=2)
-# print(toVar.get())
 
 final_button = Button(frame, text="Fly!!", command=lambda: scrape_price( from_e.get().split('|')[1],to_e.get().split('|')[1],cal1._sel_date,adult_select.get(),child_select.get(),infant_select.get(),seat_select.get()), bg='coral',height=2,width=5)
 final_button.grid(row=10, column=1,pady=10)

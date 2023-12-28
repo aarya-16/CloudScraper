@@ -66,8 +66,8 @@ def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
     #     scrape_price_i(source, destination, travel_date,adult_count,child_count,infant_count,seat_type)
 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--window-size=1920,1080')
-    chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--window-size=1920,1080')
+    # chrome_options.add_argument('--headless')
     driver = webdriver.Chrome(options=chrome_options)
     # driver = webdriver.Chrome()
 
@@ -128,5 +128,5 @@ def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
         if flight['Arrival time'][-3:] == source:
             returning_flights.append(flight)
             dict_list.remove(flight)
-
-    display(dict_list)
+    # print(dict_list)
+    display(dict_list,travel_date)
