@@ -1,6 +1,6 @@
 from tkinter import *
 from tkcalendar import Calendar
-from scraping import scrape_price
+from returnflight import scrape_price
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from tkinter import ttk

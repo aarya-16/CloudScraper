@@ -115,7 +115,7 @@ def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
 
     for flight in range(len(prices)):
         flight_info_dict = {'Airline': carrier_name[flight].text.split('\n')[0],
-                            'Flight Code': carrier_name[flight].text.split('\n')[1],
+                            'Flight code': carrier_name[flight].text.split('\n')[1],
                             'Departure time': dep_time[flight],
                             'Arrival time': arr_time[flight],
                             'Flight duration': flight_duration[flight].text.split('\n')[0],
