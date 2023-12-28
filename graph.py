@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from datetime import datetime
 import matplotlib.pyplot as plt
-import tkinter
-
 
 def make_plot(source, destination, travel_date):
     chrome_options = webdriver.ChromeOptions()
@@ -13,7 +11,6 @@ def make_plot(source, destination, travel_date):
 
     driver.get(
         f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/1/0/0/E/{travel_date}/")
-    driver.minimize_window()
     driver.implicitly_wait(10)
 
     nearby_dates = driver.find_elements(By.CLASS_NAME, "_1D4W7")

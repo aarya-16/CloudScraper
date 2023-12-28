@@ -1,3 +1,4 @@
+from tkinter import messagebox
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from tkinter import *
@@ -5,7 +6,10 @@ from display import displayr
 
 def scrape_price(dep, arr, travel_date, adult, seat,ret):
     
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--headless')
+    driver = webdriver.Chrome(options=chrome_options)
 
     source = dep.upper()
     destination = arr.upper()
@@ -14,7 +18,6 @@ def scrape_price(dep, arr, travel_date, adult, seat,ret):
 
     driver.get(
         f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{passenger_count}/0/0/{seat[0]}/{travel_date}/{return_date}")
-    driver.minimize_window()
     driver.implicitly_wait(10)
 
     prices = driver.find_elements(By.CLASS_NAME, "_3YkZQ")
@@ -54,12 +57,10 @@ def scrape_price(dep, arr, travel_date, adult, seat,ret):
         if flight['Arrival time'][-3:] == source:
             returning_flights.append(flight)
             dict_list.remove(flight)
-    if(dict_list[0]['Arrival time']!=0):
+    if(len(dep_time)!=0):
         displayr(returning_flights,dict_list,travel_date)
-    else:
-        root = Tk()
-        mess = Label(root,text="International return flights not implemented yet")
-        mess.pack()
-        root.mainloop()
+    else: 
+        messagebox.showerror("error", "International return flights not implemented yet")
+        
         
     

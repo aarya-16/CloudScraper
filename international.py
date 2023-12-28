@@ -4,23 +4,18 @@ from selenium import webdriver
 from display import display
 
 def scrape_price_i(dep, arr, travel_date,adult,child,infant,seat):
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--headless')
+    driver = webdriver.Chrome(options=chrome_options)
 
-    # source = input("Enter departure airport: ").upper()
-    # destination = input("Enter arrival airport: ").upper()
-    # passenger_count = input("Enter number of passengers: ")
-    # travel_date = input("Enter travel date in yyyy-mm-dd form:  ")
     source = dep.upper()
     destination = arr.upper()
-    passenger_count = "1"
-    adult_count = adult
-    child_count = child
-    infant_count = infant
+    passenger_count = adult
     seat_type = seat[0]
     travel_date = travel_date
     driver.get(
-        f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{passenger_count}/0/0/E/{travel_date}/")
-    driver.minimize_window()
+        f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{passenger_count}/0/0/{seat_type}/{travel_date}/")
     driver.implicitly_wait(10)
 
     flights_count = len(driver.find_elements(By.CLASS_NAME, "_2MkSl"))

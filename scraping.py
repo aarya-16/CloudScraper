@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium import webdriver
 from display import display
 from international import scrape_price_i
-
+import traceback 
 
 def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
     
@@ -11,7 +11,7 @@ def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
         chrome_options.add_argument('--window-size=1920,1080')
         chrome_options.add_argument('--headless')
         driver = webdriver.Chrome(options=chrome_options)
-        driver = webdriver.Chrome()
+        
 
         source = dep.upper()
         destination = arr.upper()
@@ -22,29 +22,18 @@ def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
         travel_date = travel_date
 
         driver.get(
-            f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{adult_count}/0/0/E/{travel_date}/{travel_date}")
+            f"https://tickets.paytm.com/flights/flightSearch/{source}/{destination}/{adult_count}/0/0/{seat_type}/{travel_date}/{travel_date}")
         driver.minimize_window()
         driver.implicitly_wait(10)
 
-        # flights_count = len(driver.find_elements(By.CLASS_NAME, "_3YkZQ"))
-        # total_flights = min(25, flights_count)
 
-        prices = driver.find_elements(By.CLASS_NAME, "_3YkZQ")  # [:total_flights]
-        carrier_name = driver.find_elements(By.CLASS_NAME, "_3Tmlu")  # [:total_flights]
+        prices = driver.find_elements(By.CLASS_NAME, "_3YkZQ")  
+        carrier_name = driver.find_elements(By.CLASS_NAME, "_3Tmlu")  
         dep_time = []
-        flight_duration = driver.find_elements(By.CLASS_NAME, "_12xh6")  # [:total_flights]
+        flight_duration = driver.find_elements(By.CLASS_NAME, "_12xh6")  
         arr_time = []
-        time = driver.find_elements(By.CLASS_NAME, "_2JyKP")  # [:(2 * total_flights)]
-        # more_details = driver.find_elements(By.CLASS_NAME, "_3U68I")[:total_flights]
-        # stops = driver.find_elements(By.CLASS_NAME, "_25GnP _1VjNa")[:total_flights]
-
-        # flight_codes = driver.find_elements(By.CSS_SELECTOR, "_1VM2t span")
-        # for element in more_details:
-        #     element.click()
-        #     codes = driver.find_elements(By.CSS_SELECTOR, "._3tMEB span")
-        #     flight_codes.append(codes[1].text)
-        #     close = driver.find_element(By.CLASS_NAME, "_3wyJs")
-        #     close.click()
+        time = driver.find_elements(By.CLASS_NAME, "_2JyKP") 
+       
 
         for index in range(len(time)):
             j = index + 1
@@ -73,4 +62,5 @@ def scrape_price(dep, arr, travel_date, adult, child, infant, seat):
         # print(dict_list)
         display(dict_list,travel_date)
     except:
+        traceback.print_exc() 
         scrape_price_i(dep, arr, travel_date, adult, child, infant, seat)

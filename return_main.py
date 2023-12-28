@@ -5,13 +5,14 @@ from tkinter import ttk
 import sqlite3
 
 def r_main():
+    
     con = sqlite3.connect('iata.db')
     cur = con.cursor()
-    cur.execute("DELETE FROM Sheet1 WHERE [City name] = 'City name'")
-    rows = cur.fetchall()
-    print(rows)
-
-
+    r = cur.execute('SELECT * FROM Sheet1') 
+    w = r.fetchall()
+    l = ['|'.join(str(item) for item in t if item is not None) for t in w]
+    con.commit()
+    
     def checkkey(event,lb): 
         value = event.widget.get() 
         if value == '': 
@@ -25,17 +26,14 @@ def r_main():
         for item in data: 
             lb.insert('end', item) 
 
-    def on_listbox_click(event,lb,e):
+    def on_listbox_click(lb,e):
         selected_index = lb.curselection()
         if selected_index:
             selected_item = lb.get(selected_index)
             e.delete(0, 'end')
             e.insert(0, selected_item)
 
-    r = cur.execute('SELECT * FROM Sheet1') 
-    w = r.fetchall()
-    l = ['|'.join(str(item) for item in t if item is not None) for t in w]
-    con.commit()
+    
 
     root = Tk()
     root.grid()
@@ -44,13 +42,7 @@ def r_main():
 
 
     frame = Frame(root)
-
-
     frame.grid(row=0, column=0)
-    toVar = StringVar()
-    fromVar = StringVar()
-    depVar = StringVar()
-    arrVar = StringVar()
 
     fromLabel = Label(frame, text="From: ")
     fromLabel.grid(row=0, column=0,pady=10) 
@@ -62,7 +54,7 @@ def r_main():
     from_lb = Listbox(frame,width=50,height=5) 
     from_lb.grid(row=1, column=1) 
     update(l,from_lb)
-    from_lb.bind('<ButtonRelease-1>', lambda event: on_listbox_click(event,from_lb,from_e))
+    from_lb.bind('<ButtonRelease-1>', lambda event: on_listbox_click(from_lb,from_e))
 
     toLabel = Label(frame, text="To: ")
     toLabel.grid(row=0, column=2,pady=10)
