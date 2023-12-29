@@ -1,11 +1,23 @@
 from tkinter import *
+from tkinter import messagebox
 from tkcalendar import Calendar
 from returnflight import scrape_price
 from tkinter import ttk
 import sqlite3
 
 def r_main():
-    
+    def handle_error():
+        try:
+            from_e.get().split('|')[1]
+            to_e.get().split('|')[1]
+            cal1._sel_date
+            cal2._sel_date
+            adult_select.get()
+            seat_select.get()
+            if cal1._sel_date>cal2._sel_date:
+                raise ValueError
+        except:
+            messagebox.showerror('Error','An error has occured please ensure all information is filled appropriate')
     con = sqlite3.connect('iata.db')
     cur = con.cursor()
     r = cur.execute('SELECT * FROM Sheet1') 
@@ -66,7 +78,7 @@ def r_main():
     to_lb = Listbox(frame,width=50,height=5) 
     to_lb.grid(row=1, column=3) 
     update(l,to_lb)
-    to_lb.bind('<ButtonRelease-1>', lambda event: on_listbox_click(event,to_lb,to_e))
+    to_lb.bind('<ButtonRelease-1>', lambda event: on_listbox_click(to_lb,to_e))
 
     depLabel = Label(frame, text="Departure date: ")
     depLabel.grid(row=4, column=0,pady=10)
@@ -96,8 +108,10 @@ def r_main():
     adult_select = Spinbox(frame, from_= 1, to = 25,state='readonly')
     adult_select.grid(row=8,column=2,pady=10)
 
-    final_button = Button(frame, text="Fly!!", command=lambda: scrape_price( from_e.get().split('|')[1],to_e.get().split('|')[1],cal1._sel_date,adult_select.get(),seat_select.get(),cal2._sel_date), bg='coral',height=2,width=5)
+    final_button = Button(frame, text="Fly!!", command=lambda: [handle_error(),scrape_price( from_e.get().split('|')[1],to_e.get().split('|')[1],cal1._sel_date,adult_select.get(),seat_select.get(),cal2._sel_date)], bg='coral',height=2,width=5)
     final_button.grid(row=11, column=1,pady=10,columnspan=3)
 
         
     root.mainloop()
+if __name__ == "__main__":
+    r_main()

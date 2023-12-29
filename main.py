@@ -1,11 +1,22 @@
 from tkinter import *
+from tkinter import messagebox
 from tkcalendar import Calendar
 from scraping import scrape_price
 from tkinter import ttk
 
 import sqlite3
 
+
 def main_o():
+    def handle_error():
+        try:
+            from_e.get().split('|')[1]
+            to_e.get().split('|')[1]
+            cal1._sel_date
+            adult_select.get()
+            seat_select.get()
+        except:
+            messagebox.showerror('Error','An error has occured please ensure all information is filled appropriate')
     con = sqlite3.connect('iata.db')
     cur = con.cursor()
     r = cur.execute('SELECT * FROM Sheet1') 
@@ -88,10 +99,10 @@ def main_o():
 
     adult_select = Spinbox(frame, from_= 1, to = 25,state='readonly')
     adult_select.grid(row=7,column=1,pady=10)
-
-    final_button = Button(frame, text="Fly!!", command=lambda: scrape_price( from_e.get().split('|')[1],to_e.get().split('|')[1],cal1._sel_date,adult_select.get(),0,0,seat_select.get()), bg='coral',height=2,width=5)
+    
+    final_button = Button(frame, text="Fly!!", command=lambda: [ handle_error(),scrape_price(from_e.get().split('|')[1],to_e.get().split('|')[1],cal1._sel_date,adult_select.get(),0,0,seat_select.get())], bg='coral',height=2,width=5)
     final_button.grid(row=10, column=1,pady=10)
-
+    
         
     root.mainloop()
 if __name__ == "__main__":
