@@ -3,7 +3,7 @@ from tkinter import ttk
 from graph import make_plot
 
 def displayr(dict_list1,dict_list,date):
-    root = Toplevel()
+    root = Tk()
     root.title("Flight Information")
     root.configure(bg='white')
 
@@ -27,7 +27,6 @@ def displayr(dict_list1,dict_list,date):
                     fieldbackground="black", foreground="white")
     style.configure('Treeview.Heading', background="coral",relief='flat')
     table = ttk.Treeview(frame, columns=column, show="headings", style="Treeview")
-
 
     for col in column:
         table.heading(col, text=col)
@@ -57,7 +56,7 @@ def displayr(dict_list1,dict_list,date):
     
     
 def display(dict_list,date):
-    root = Toplevel()
+    root = Tk()
     root.title("Flight Information")
     root.configure(bg='white')
 
@@ -77,7 +76,7 @@ def display(dict_list,date):
     column = ("Airline", "Flight Code", "Departure Time", "Arrival Time", "Duration", "Price")
 
     style = ttk.Style(frame) 
-    style.theme_use("alt") # set theam to clam
+    style.theme_use("alt")
     style.configure("Treeview", background="black", 
                     fieldbackground="black", foreground="white")
     style.configure('Treeview.Heading', background="coral",relief='flat')
@@ -87,7 +86,6 @@ def display(dict_list,date):
     for col in column:
         table.heading(col, text=col)
 
-    # Adjust column widths
     table.column("Airline", width=150)
     table.column("Flight Code", width=100)
     table.column("Departure Time", width=150)
